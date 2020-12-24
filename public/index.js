@@ -1,11 +1,13 @@
+const { fail } = require('assert')
+
 ;(async () => {
   const fs = require('fs')
   const nodemailer = require('nodemailer')
   const { resolve } = require('path')
+  const qs = require('querystring')
 
   let config = JSON.parse(fs.readFileSync(resolve(__dirname, './config.json')))
   let mail = JSON.parse(fs.readFileSync(resolve(__dirname, './mail.json')))
-  console.log({ ...mail, attachments: 'hello' })
 
   const pages = [
     document.querySelector('.start'),
@@ -21,11 +23,19 @@
   const btnNext = document.querySelector('button[data-action="next"]')
   const btnSend = document.querySelector('button[data-action="send"]')
   const btnBack = document.querySelector('button[data-action="back"]')
-  console.log(btnBack)
 
-  inputEmail.addEventListener('input', () => {
+  inputEmail.addEventListener('click', () => {
+    inputName.dataset.active = false
+    inputEmail.dataset.active = true
+  })
+  inputName.addEventListener('click', () => {
+    inputName.dataset.active = true
+    inputEmail.dataset.active = false
+  })
+  inputEmail.addEventListener('change', () => {
     console.log(inputEmail.value)
-    console.log(inputName.value)
+  })
+  inputEmail.addEventListener('input', () => {
     if (
       inputEmail.value !== '' &&
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
@@ -37,8 +47,6 @@
     }
   })
   inputName.addEventListener('input', () => {
-    console.log(inputEmail.value)
-    console.log(inputName.value)
     if (
       inputEmail.value !== '' &&
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
@@ -54,21 +62,23 @@
   let currentPicture = ''
 
   const showOnBigPicture = e => {
-    pathToPhoto = `${pathToPhotos}/${e.currentTarget.dataset.picture}`
+    const pathToPhoto = `${pathToPhotos}/${e.currentTarget.dataset.picture}`
     currentPicture = e.currentTarget.dataset.picture
     bigImageStart.style.backgroundImage = `url('${pathToPhoto}')`
     bigImageFill.style.backgroundImage = `url('${pathToPhoto}')`
+    
+    btnNext.disabled = false
   }
 
   const renderPhotos = async () => {
     let photos = await getPhotos(pathToPhotos)
     thumbnailsContainer.innerHTML = ''
     photos.forEach(photo => {
-      const path = `${pathToPhotos}/${photo}`
+      pathToPhoto = `${pathToPhotos}/${photo}`
 
       const photoDiv = document.createElement('div')
       photoDiv.addEventListener('click', showOnBigPicture)
-      photoDiv.style.backgroundImage = `url('${path}')`
+      photoDiv.style.backgroundImage = `url('${pathToPhoto}')`
       photoDiv.dataset.picture = photo
 
       thumbnailsContainer.appendChild(photoDiv)
@@ -82,7 +92,11 @@
           reject(err)
         } else {
           let filteredFiles = files.filter(file => {
-            return file.split('.')[file.split('.').length - 1] === 'jpg'
+            return (
+              file.split('.')[0].split('_')[
+                file.split('.')[0].split('_').length - 1
+              ] === 'Frame'
+            )
           })
           resolve([...filteredFiles])
         }
@@ -91,7 +105,6 @@
   }
 
   const activateWatching = folder => {
-    console.log('watching started', folder)
     fs.watch(folder, () => {
       renderPhotos()
     })
@@ -101,8 +114,10 @@
   activateWatching(pathToPhotos)
 
   btnNext.addEventListener('click', () => {
-    pages[0].classList.add('hidden')
-    pages[1].classList.remove('hidden')
+    if (currentPicture) {
+      pages[0].classList.add('hidden')
+      pages[1].classList.remove('hidden')
+    }
   })
   btnBack.addEventListener('click', () => {
     pages[1].classList.add('hidden')
@@ -132,7 +147,6 @@
       }
       mailToSend.to = inputEmail.value
       mailToSend.html = mailToSend.html.replace(/({name})/g, inputName.value)
-      console.log(mailToSend.html)
       let info = await transporter.sendMail(mailToSend)
       pages[2].classList.add('hidden')
       pages[3].classList.remove('hidden')
@@ -146,4 +160,69 @@
 
     main().catch(console.error)
   })
+
+  const enableKeyboard = () => {
+    const keyboard = document.querySelector('.keyboard')
+    const keys = Array.from(
+      document.querySelectorAll('.keyboard .key[data-key]')
+    )
+
+    const shiftUp = () => {
+      keyboard.dataset.shifted = true
+      keys.forEach(key => {
+        key.textContent = key.textContent.toUpperCase()
+        key.dataset.key = key.dataset.key.toUpperCase()
+      })
+    }
+
+    const shiftDown = () => {
+      keyboard.dataset.shifted = false
+      keys.forEach(key => {
+        key.textContent = key.textContent.toLowerCase()
+        key.dataset.key = key.dataset.key.toLowerCase()
+      })
+    }
+
+    keys.forEach(key => {
+      key.addEventListener('click', () => {
+        const input = document.querySelector('input[data-active="true"]')
+        input.value += key.dataset.key
+        keyboard.dataset.shifted === 'true' ? shiftDown() : null
+        if (inputEmail.value !== '') {
+          if (inputName.value !== '') {
+            if (
+              /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+                inputEmail.value
+              )
+            ) {
+              btnSend.disabled = false
+            }
+          }
+        }
+      })
+    })
+
+    const actionKeys = Array.from(
+      document.querySelectorAll('.keyboard .key[data-action-key]')
+    )
+    actionKeys.forEach(key => {
+      key.addEventListener('click', () => {
+        const input = document.querySelector('input[data-active="true"]')
+        switch (key.dataset['actionKey']) {
+          case 'backspace':
+            let value = input.value.split('')
+            value.pop()
+            input.value = value.join('')
+            break
+          case 'shift':
+            keyboard.dataset.shifted === 'true' ? shiftDown() : shiftUp()
+            break
+
+          default:
+            break
+        }
+      })
+    })
+  }
+  enableKeyboard()
 })()
