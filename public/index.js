@@ -54,7 +54,8 @@
   let currentPicture = ''
 
   const showOnBigPicture = e => {
-    pathToPhoto = e.currentTarget.style.backgroundImage.split('"')[1]
+    pathToPhoto = `${pathToPhotos}/${e.currentTarget.dataset.picture}`
+    console.log(pathToPhoto)
     currentPicture = e.currentTarget.dataset.picture
     console.log(currentPicture)
     bigImageStart.style.backgroundImage = `url(${pathToPhoto})`
