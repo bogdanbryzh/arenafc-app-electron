@@ -247,6 +247,7 @@
 }
 
 .keyboard .row .key {
+  user-select: none;
   padding: 20px;
   width: 100%;
   background-color: var(--main-color);
