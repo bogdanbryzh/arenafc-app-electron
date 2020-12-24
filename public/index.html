@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="./../node_modules/simplebar/dist/simplebar.min.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="container">
+    <header class="header">
+      <div class="logol">
+        <img src="./img/arena-logo.svg" alt="arena" />
+        <p>самара арена</p>
+      </div>
+      <div class="logor">
+        <img src="./img/logo-r.svg" alt="logo" />
+      </div>
+    </header>
+    <div class="page start">
+      <div class="content">
+        <div class="top">
+          <h1>ВЫберите фото</h1>
+        </div>
+        <div class="medium">
+          <div class="photos" data-simplebar data-simplebar-auto-hide="false">
+            <div class="grid">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+          <div class="photo">
+            <div class="cover">
+              <div class="img"></div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom">
+          <button data-action="next">Далее</button>
+        </div>
+      </div>
+    </div>
+    <div class="page filling hidden">
+      <div class="content">
+        <div class="top">
+          <h1>Введите данные</h1>
+          <button data-action="back">Назад</button>
+        </div>
+        <div class="medium">
+          <div class="form">
+            <input type="text" name="name" placeholder="Введите Ваше ФИО" />
+            <input type="email" name="mail" placeholder="Ваш E-mail адрес" />
+            <div class="keyboard"></div>
+          </div>
+          <div class="img"></div>
+        </div>
+        <div class="bottom">
+          <button data-action="send" disabled>Отправить!</button>
+        </div>
+      </div>
+    </div>
+    <div class="page sending hidden">
+      <h1>ОТПРавка фото</h1>
+      <img src="./img/loader.svg" alt="loader" />
+    </div>
+    <div class="page sent hidden">
+      <h1>ОТПРАВЛЕНО!</h1>
+    </div>
+    <script src="./../node_modules/simplebar/dist/simplebar.min.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>

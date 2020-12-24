@@ -1,0 +1,6 @@
+{
+  "from": "\"Самара Арена\" <photo@samara-arena.info>",
+  "to": "{mail}",
+  "subject": "Фотография от \"Самара Арена\"",
+  "html": "<p>Приветсвуем, <strong>{name}</strong>!</p><p>Ваше фото во вложении</p>"
+}

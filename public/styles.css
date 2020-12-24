@@ -1,0 +1,307 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+.hidden {
+  display: none !important;
+}
+
+/* VARS */
+:root {
+  --main-color: #1273e4;
+}
+
+.container {
+  top: 0;
+  left: 0;
+  background-image: url('./img/bg.png'),
+    linear-gradient(
+      180deg,
+      #eff4ff 0%,
+      #eaf0ff 23.44%,
+      #e6edff 64.06%,
+      #adc6ff 100%
+    );
+  background-size: cover, cover;
+  position: relative;
+  width: 3840px;
+  height: 2160px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.header .logol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 36px;
+  margin-left: 62px;
+}
+.header .logol .logo {
+  width: 220px;
+}
+.header .logol p {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 80%;
+  text-transform: uppercase;
+  color: var(--main-color);
+  margin-top: 18px;
+}
+.header .logor {
+  margin-right: 120px;
+  margin-top: 20px;
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Content */
+.start,
+.filling {
+  padding: 200px 340px;
+}
+
+.content {
+  height: 100%;
+}
+
+.content .top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 120px;
+}
+
+.content .top h1 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 114px;
+  line-height: 135%;
+  text-transform: uppercase;
+  color: var(--main-color);
+}
+
+.filling .content .top button {
+  border: 8px solid var(--main-color);
+  box-sizing: border-box;
+  border-radius: 300px;
+  width: 615px;
+  height: 206px;
+  background-color: transparent;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 90px;
+  line-height: 135%;
+  text-align: center;
+  color: var(--main-color);
+}
+
+.content .medium {
+  height: 1258px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content .bottom {
+  margin-top: 110px;
+  display: flex;
+  justify-content: center;
+}
+
+.content .bottom button {
+  background: var(--main-color);
+  border-radius: 300px;
+  height: 206px;
+  width: 1264px;
+  border: none;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 90px;
+  line-height: 135%;
+  color: #fff;
+}
+.content .bottom button:disabled {
+  background: #b9b9b9;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* START PAGE */
+
+.start .content .photos {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(18, 115, 228, 0.05);
+}
+
+.start .photos .scroll-parent {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.start .photos .scroll-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: -17px;
+  overflow-y: scroll;
+}
+
+.start .photos .grid {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(auto-fill, 280px);
+  grid-gap: 30px;
+}
+
+.start .photos .grid > * {
+  width: 280px;
+  height: 280px;
+  background-size: cover;
+  background-position: center center;
+  background-image: url('./img/placeholder.svg');
+}
+
+
+.start .content .medium .photo {
+  min-width: 1118px;
+  height: 1258px;
+  background-color: #c4c4c4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 30px;
+}
+.start .content .medium .cover {
+  width: 1060px;
+  height: 1200px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.start .content .medium .img {
+  width: 860px;
+  height: 1000px;
+  background-image: url('./img/placeholder.svg');
+  background-size: cover;
+  background-position: center center;
+}
+
+/* FILLING PAGE */
+
+.filling .content .medium .form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filling .content .medium .form input {
+  background-color: var(--main-color);
+  width: 100%;
+  height: 171px;
+  border: 5px solid #f2f2f2;
+  box-sizing: border-box;
+  border-radius: 150px;
+  margin-bottom: 55px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 90px;
+  line-height: 135%;
+  padding: 20px 50px;
+  color: #ffffff;
+  outline: none;
+}
+.filling .content .medium .form input::placeholder {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 90px;
+  line-height: 135%;
+  opacity: 0.4;
+  color: #ffffff;
+}
+
+.filling .content .medium .form .keyboard {
+  margin-top: 65px;
+  width: 80%;
+  height: 666px;
+  background-color: green;
+}
+
+.filling .content .medium .img {
+  width: 1258px;
+  min-width: 1258px;
+  height: 1258px;
+  background-image: url('./img/placeholder.svg');
+  background-size: cover;
+  background-position: center center;
+  margin-left: 30px;
+}
+
+/* SENDING PAGE */
+
+@keyframes spin {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.sending {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.sending h1 {
+  margin-bottom: 100px;
+}
+.sending img {
+  animation: spin 8s linear infinite;
+}
+
+/* SENT PAGE */
+
+.sent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Common styles */
+.sending h1,
+.sent h1 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 150px;
+  line-height: 135%;
+  text-transform: uppercase;
+  color: var(--main-color);
+}
