@@ -233,7 +233,7 @@
 }
 
 .keyboard {
-  width: 90%;
+  width: 95%;
   margin-top: 33px;
   height: 333px;
   display: grid;
@@ -270,6 +270,13 @@
 .keyboard .row .key[data-key=' '] {
   min-width: 305px !important;
 }
+
+.keyboard[data-lang='en'] .row[data-lang-row='rus'] {
+  display: none;
+} 
+.keyboard[data-lang='rus'] .row[data-lang-row='en'] {
+  display: none;
+} 
 
 .filling .content .medium .img {
   width: 629px;

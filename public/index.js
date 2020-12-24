@@ -66,7 +66,7 @@ const { fail } = require('assert')
     currentPicture = e.currentTarget.dataset.picture
     bigImageStart.style.backgroundImage = `url('${pathToPhoto}')`
     bigImageFill.style.backgroundImage = `url('${pathToPhoto}')`
-    
+
     btnNext.disabled = false
   }
 
@@ -216,6 +216,10 @@ const { fail } = require('assert')
             break
           case 'shift':
             keyboard.dataset.shifted === 'true' ? shiftDown() : shiftUp()
+            break
+          case 'lang':
+            keyboard.dataset.lang =
+              keyboard.dataset.lang === 'en' ? 'rus' : 'en'
             break
 
           default:

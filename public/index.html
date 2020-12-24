@@ -77,10 +77,16 @@
         </div>
         <div class="medium">
           <div class="form">
-            <input type="text" name="name" placeholder="Введите Ваше ФИО" autofocus data-active="true" />
+            <input
+              type="text"
+              name="name"
+              placeholder="Введите Ваше ФИО"
+              autofocus
+              data-active="true"
+            />
             <input type="email" name="mail" placeholder="Ваш E-mail адрес" />
-            <div class="keyboard" data-lang="en" data-shifted="false">
-              <div class="row">
+            <div class="keyboard" data-lang="rus" data-shifted="false">
+              <div class="row" data-lang-row="en">
                 <div class="key" data-key="q">q</div>
                 <div class="key" data-key="w">w</div>
                 <div class="key" data-key="e">e</div>
@@ -92,7 +98,21 @@
                 <div class="key" data-key="o">o</div>
                 <div class="key" data-key="p">p</div>
               </div>
-              <div class="row">
+              <div class="row" data-lang-row="rus">
+                <div class="key" data-key="й">й</div>
+                <div class="key" data-key="ц">ц</div>
+                <div class="key" data-key="у">у</div>
+                <div class="key" data-key="к">к</div>
+                <div class="key" data-key="е">е</div>
+                <div class="key" data-key="н">н</div>
+                <div class="key" data-key="г">г</div>
+                <div class="key" data-key="ш">ш</div>
+                <div class="key" data-key="щ">щ</div>
+                <div class="key" data-key="з">з</div>
+                <div class="key" data-key="х">х</div>
+                <div class="key" data-key="ъ">ъ</div>
+              </div>
+              <div class="row" data-lang-row="en">
                 <div class="key" data-key="a">a</div>
                 <div class="key" data-key="s">s</div>
                 <div class="key" data-key="d">d</div>
@@ -102,10 +122,30 @@
                 <div class="key" data-key="j">j</div>
                 <div class="key" data-key="k">k</div>
                 <div class="key" data-key="l">l</div>
-                <div class="key" data-action-key="backspace"><img src="./img/backspace.svg" alt="" /></div>
+                <div class="key" data-action-key="backspace">
+                  <img src="./img/backspace.svg" alt="" />
+                </div>
               </div>
-              <div class="row">
-                <div class="key" data-action-key="shift"><img src="./img/shift.svg" alt=""></div>
+              <div class="row" data-lang-row="rus">
+                <div class="key" data-key="ф">ф</div>
+                <div class="key" data-key="ы">ы</div>
+                <div class="key" data-key="в">в</div>
+                <div class="key" data-key="а">а</div>
+                <div class="key" data-key="п">п</div>
+                <div class="key" data-key="р">р</div>
+                <div class="key" data-key="о">о</div>
+                <div class="key" data-key="л">л</div>
+                <div class="key" data-key="д">д</div>
+                <div class="key" data-key="ж">ж</div>
+                <div class="key" data-key="э">э</div>
+                <div class="key" data-action-key="backspace">
+                  <img src="./img/backspace.svg" alt="" />
+                </div>
+              </div>
+              <div class="row" data-lang-row="en">
+                <div class="key" data-action-key="shift">
+                  <img src="./img/shift.svg" alt="" />
+                </div>
                 <div class="key" data-key="z">z</div>
                 <div class="key" data-key="x">x</div>
                 <div class="key" data-key="c">c</div>
@@ -115,9 +155,26 @@
                 <div class="key" data-key="m">m</div>
                 <div class="key" data-key="@">@</div>
               </div>
+              <div class="row" data-lang-row="rus">
+                <div class="key" data-action-key="shift">
+                  <img src="./img/shift.svg" alt="" />
+                </div>
+                <div class="key" data-key="я">я</div>
+                <div class="key" data-key="ч">ч</div>
+                <div class="key" data-key="с">с</div>
+                <div class="key" data-key="м">м</div>
+                <div class="key" data-key="и">и</div>
+                <div class="key" data-key="т">т</div>
+                <div class="key" data-key="ь">ь</div>
+                <div class="key" data-key="б">б</div>
+                <div class="key" data-key="ю">ю</div>
+                <div class="key" data-key="@">@</div>
+              </div>
               <div class="row">
                 <div class="key" data-action-key="num">123</div>
-                <div class="key" data-action-key="lang"><img src="./img/globe.svg" alt=""></div>
+                <div class="key" data-action-key="lang">
+                  <img src="./img/globe.svg" alt="" />
+                </div>
                 <div class="key" data-key=" "></div>
                 <div class="key" data-key=".">.</div>
                 <div class="key" data-key=".com">.com</div>
