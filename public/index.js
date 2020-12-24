@@ -55,11 +55,9 @@
 
   const showOnBigPicture = e => {
     pathToPhoto = `${pathToPhotos}/${e.currentTarget.dataset.picture}`
-    console.log(pathToPhoto)
     currentPicture = e.currentTarget.dataset.picture
-    console.log(currentPicture)
-    bigImageStart.style.backgroundImage = `url(${pathToPhoto})`
-    bigImageFill.style.backgroundImage = `url(${pathToPhoto})`
+    bigImageStart.style.backgroundImage = `url('${pathToPhoto}')`
+    bigImageFill.style.backgroundImage = `url('${pathToPhoto}')`
   }
 
   const renderPhotos = async () => {
