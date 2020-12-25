@@ -10,6 +10,7 @@
 
 /* VARS */
 :root {
+  user-select: none;
   --main-color: #1273e4;
 }
 
@@ -107,7 +108,7 @@
   border-radius: 150px;
   width: 307px;
   height: 103px;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.01);
   font-style: normal;
   font-weight: bold;
   font-size: 45px;
