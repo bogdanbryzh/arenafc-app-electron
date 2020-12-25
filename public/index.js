@@ -33,10 +33,10 @@ const { fail } = require('assert')
   inputName.addEventListener('click', () => {
     inputName.dataset.active = true
     inputEmail.dataset.active = false
+
+    document.querySelector('.keyboard').dataset.lang = 'rus'
   })
-  inputEmail.addEventListener('change', () => {
-    console.log(inputEmail.value)
-  })
+
   inputEmail.addEventListener('input', () => {
     if (
       inputEmail.value !== '' &&
@@ -190,6 +190,8 @@ const { fail } = require('assert')
       key.addEventListener('click', () => {
         const input = document.querySelector('input[data-active="true"]')
         input.value += key.dataset.key
+        input.focus()
+        input.setSelectionRange(input.value.length, input.value.length)
         keyboard.dataset.shifted === 'true' ? shiftDown() : null
         if (inputEmail.value !== '') {
           if (inputName.value !== '') {

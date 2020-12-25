@@ -208,6 +208,7 @@
 }
 
 .filling .content .medium .form input {
+  overflow-x: auto;
   background-color: var(--main-color);
   width: 100%;
   height: 85px;
