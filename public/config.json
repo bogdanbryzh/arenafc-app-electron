@@ -1,3 +1,4 @@
 {
-  "pathToPhotos": "//10.4.17.21/Photo"
+  "pathToPhotos": "//10.4.17.21/Photo",
+  "pathToThumbnails": "thumbnails"
 }

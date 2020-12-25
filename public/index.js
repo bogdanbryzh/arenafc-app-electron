@@ -74,10 +74,14 @@ const { fail } = require('assert')
   })
 
   const pathToPhotos = config.pathToPhotos
+  const pathToThumbnails = config.pathToThumbnails
   let currentPicture = ''
 
   const showOnBigPicture = e => {
-    const pathToPhoto = `${pathToPhotos}/${e.currentTarget.dataset.picture}`
+    const photo = e.currentTarget.dataset.picture
+    const pathToPhoto = `${pathToPhotos}/${photo.split('.')[0]}_Frame.${
+      photo.split('.')[1]
+    }`
     currentPicture = e.currentTarget.dataset.picture
     bigImageStart.src = pathToPhoto
     bigImageFill.src = pathToPhoto
@@ -89,14 +93,15 @@ const { fail } = require('assert')
     let photos = await getPhotos(pathToPhotos)
     thumbnailsContainer.innerHTML = ''
     photos.forEach(photo => {
-      pathToPhoto = `${pathToPhotos}/${photo}`
+      pathToPhoto = `${pathToPhotos}/${pathToThumbnails}/${
+        photo.split('.')[0]
+      }_Small.${photo.split('.')[1]}`
 
       const photoDiv = document.createElement('div')
       photoDiv.addEventListener('click', showOnBigPicture)
       const image = document.createElement('img')
       image.src = pathToPhoto
       image.alt = photo
-      // photoDiv.style.backgroundImage = `url('${pathToPhoto}')`
       photoDiv.dataset.picture = photo
       photoDiv.appendChild(image)
 
@@ -111,6 +116,7 @@ const { fail } = require('assert')
           reject(err)
         } else {
           files = files
+            .slice(1, -1)
             .map(fileName => {
               return {
                 name: fileName,
@@ -127,7 +133,7 @@ const { fail } = require('assert')
               return (
                 file.split('.')[0].split('_')[
                   file.split('.')[0].split('_').length - 1
-                ] === 'Frame'
+                ] !== 'Frame'
               )
             })
           console.log(files)
