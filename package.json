@@ -26,7 +26,7 @@
   "build": {
     "appId": "arenafc.app",
     "mac": {
-      "category": "arenafc.app.home.porno"
+      "category": "arenafc.app.show.event"
     }
   },
   "description": "An app for ARENA FC SAMARA",
