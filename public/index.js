@@ -7,8 +7,6 @@ const { fail } = require('assert')
   const lowdb = require('lowdb')
   const FileSync = require('lowdb/adapters/FileSync')
 
-  const lazyLoadInstance = new LazyLoad()
-
   if (!fs.existsSync('c:\\documents')) {
     fs.mkdirSync('c:\\documents')
   }
@@ -96,15 +94,13 @@ const { fail } = require('assert')
       const photoDiv = document.createElement('div')
       photoDiv.addEventListener('click', showOnBigPicture)
       const image = document.createElement('img')
-      image.classList.add('lazy')
-      image.dataset.src = pathToPhoto
+      image.src = pathToPhoto
       image.alt = photo
       // photoDiv.style.backgroundImage = `url('${pathToPhoto}')`
       photoDiv.dataset.picture = photo
       photoDiv.appendChild(image)
 
       thumbnailsContainer.appendChild(photoDiv)
-      lazyLoadInstance.update()
     })
   }
 
