@@ -224,7 +224,12 @@ const { fail } = require('assert')
             break
           case 'lang':
             keyboard.dataset.lang =
-              keyboard.dataset.lang === 'en' ? 'rus' : 'en'
+              keyboard.dataset.layout === 'num'
+                ? keyboard.dataset.lang
+                : keyboard.dataset.lang === 'en'
+                ? 'rus'
+                : 'en'
+            keyboard.dataset.layout = 'text'
             break
           case 'num':
             keyboard.dataset.layout =
@@ -235,6 +240,33 @@ const { fail } = require('assert')
             break
         }
       })
+    })
+
+    const deleteOnHold = () => {
+      window.intervalDeleting = window.setInterval(() => {
+        const input = document.querySelector('input[data-active="true"]')
+        let value = input.value.split('')
+        value.pop()
+        input.value = value.join('')
+      }, 100)
+    }
+
+    Array.from(
+      document.querySelectorAll('.key[data-action-key="backspace"]')
+    ).forEach(key => {
+      const mouseDownHandler = () => {
+        window.timeout = setTimeout(deleteOnHold, 500)
+      }
+      const clearAfter = () => {
+        if (window.timeout) {
+          window.clearTimeout(timeout)
+        }
+        if (window.intervalDeleting) {
+          window.clearInterval(intervalDeleting)
+        }
+      }
+      key.addEventListener('mousedown', mouseDownHandler)
+      key.addEventListener('mouseup', clearAfter)
     })
   }
   enableKeyboard()
