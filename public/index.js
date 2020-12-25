@@ -27,6 +27,8 @@ const { fail } = require('assert')
   inputEmail.addEventListener('click', () => {
     inputName.dataset.active = false
     inputEmail.dataset.active = true
+
+    document.querySelector('.keyboard').dataset.lang = 'en'
   })
   inputName.addEventListener('click', () => {
     inputName.dataset.active = true
@@ -152,6 +154,7 @@ const { fail } = require('assert')
       pages[3].classList.remove('hidden')
       inputEmail.value = ''
       inputName.value = ''
+      btnSend.disabled = true
       setTimeout(() => {
         pages[3].classList.add('hidden')
         pages[0].classList.remove('hidden')
@@ -190,12 +193,14 @@ const { fail } = require('assert')
         keyboard.dataset.shifted === 'true' ? shiftDown() : null
         if (inputEmail.value !== '') {
           if (inputName.value !== '') {
-            if (
-              /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
-                inputEmail.value
-              )
-            ) {
-              btnSend.disabled = false
+            if (!/\d/.test(inputName.value)) {
+              if (
+                /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+                  inputEmail.value
+                )
+              ) {
+                btnSend.disabled = false
+              }
             }
           }
         }
@@ -220,6 +225,10 @@ const { fail } = require('assert')
           case 'lang':
             keyboard.dataset.lang =
               keyboard.dataset.lang === 'en' ? 'rus' : 'en'
+            break
+          case 'num':
+            keyboard.dataset.layout =
+              keyboard.dataset.layout === 'text' ? 'num' : 'text'
             break
 
           default:

@@ -273,10 +273,16 @@
 
 .keyboard[data-lang='en'] .row[data-lang-row='rus'] {
   display: none;
-} 
+}
 .keyboard[data-lang='rus'] .row[data-lang-row='en'] {
   display: none;
-} 
+}
+.keyboard[data-layout='num'] .row[data-layout-row='text'] {
+  display: none;
+}
+.keyboard[data-layout='text'] .row[data-layout-row='num'] {
+  display: none;
+}
 
 .filling .content .medium .img {
   width: 629px;
