@@ -4,7 +4,20 @@ const { fail } = require('assert')
   const fs = require('fs')
   const nodemailer = require('nodemailer')
   const { resolve } = require('path')
-  const qs = require('querystring')
+  const lowdb = require('lowdb')
+  const FileSync = require('lowdb/adapters/FileSync')
+
+  if (!fs.existsSync('c:\\documents')) {
+    fs.mkdirSync('c:\\documents')
+  }
+  if (!fs.existsSync('c:\\documents\\data.json')) {
+    fs.writeFileSync('data.json', JSON.stringify({ users: [] }))
+  }
+
+  const adapter = new FileSync('C:\\documents\\data.json')
+  const db = lowdb(adapter)
+
+  db.defaults({ users: [] }).write()
 
   let config = JSON.parse(fs.readFileSync(resolve(__dirname, './config.json')))
   let mail = JSON.parse(fs.readFileSync(resolve(__dirname, './mail.json')))
@@ -129,6 +142,12 @@ const { fail } = require('assert')
     pages[1].classList.add('hidden')
     pages[2].classList.remove('hidden')
     const main = async () => {
+      db.get('users')
+        .push({
+          name: inputName.value,
+          email: inputEmail.value,
+        })
+        .write()
       let transporter = nodemailer.createTransport({
         host: 'smtp.yandex.ru',
         port: 465,
@@ -191,7 +210,9 @@ const { fail } = require('assert')
         const input = document.querySelector('input[data-active="true"]')
         input.value += key.dataset.key
         input.focus()
-        input.setSelectionRange(input.value.length, input.value.length)
+        document
+          .querySelector('input[data-active="true" type="text"]')
+          .setSelectionRange(input.value.length, input.value.length)
         keyboard.dataset.shifted === 'true' ? shiftDown() : null
         if (inputEmail.value !== '') {
           if (inputName.value !== '') {

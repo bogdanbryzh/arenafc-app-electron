@@ -4,12 +4,15 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "electron": "^11.1.1",
+    "lowdb": "^1.0.0",
     "nodemailer": "^6.4.17",
     "simplebar": "^5.3.0"
   },
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
   "prettier": {
     "tabWidth": 2,
@@ -19,5 +22,17 @@
     "bracketSpacing": true,
     "useTabs": false,
     "trailingComma": "es5"
+  },
+  "build": {
+    "appId": "arenafc.app",
+    "mac": {
+      "category": "arenafc.app.home.porno"
+    }
+  },
+  "description": "An app for ARENA FC SAMARA",
+  "author": "<bogdan.bryzh@gmail.com> Bogdan Bryzh",
+  "devDependencies": {
+    "electron": "^11.1.1",
+    "electron-builder": "^22.9.1"
   }
 }
