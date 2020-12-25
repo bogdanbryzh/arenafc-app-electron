@@ -193,9 +193,15 @@
 .start .content .medium .img {
   width: 430px;
   height: 500px;
-  background-image: url('./img/placeholder.svg');
+  /* background-image: url('./img/placeholder.svg');
   background-size: cover;
-  background-position: center center;
+  background-position: center center; */
+}
+
+.start .content .medium .img img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
 }
 
 /* FILLING PAGE */
@@ -289,10 +295,15 @@
   width: 629px;
   min-width: 629px;
   height: 629px;
-  background-image: url('./img/placeholder.svg');
+  /* background-image: url('./img/placeholder.svg');
   background-size: cover;
-  background-position: center center;
+  background-position: center center; */
   margin-left: 15px;
+}
+.filling .content .medium .img img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
 }
 
 /* SENDING PAGE */

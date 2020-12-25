@@ -7,6 +7,8 @@ const { fail } = require('assert')
   const lowdb = require('lowdb')
   const FileSync = require('lowdb/adapters/FileSync')
 
+  const lazyLoadInstance = new LazyLoad()
+
   if (!fs.existsSync('c:\\documents')) {
     fs.mkdirSync('c:\\documents')
   }
@@ -28,8 +30,8 @@ const { fail } = require('assert')
     document.querySelector('.sending'),
     document.querySelector('.sent'),
   ]
-  const bigImageStart = document.querySelector('.start .img')
-  const bigImageFill = document.querySelector('.filling .img')
+  const bigImageStart = document.querySelector('.start .img img')
+  const bigImageFill = document.querySelector('.filling .img img')
   const thumbnailsContainer = document.querySelector('.photos .grid')
   const inputName = document.querySelector('input[name="name"]')
   const inputEmail = document.querySelector('input[name="mail"]')
@@ -79,8 +81,8 @@ const { fail } = require('assert')
   const showOnBigPicture = e => {
     const pathToPhoto = `${pathToPhotos}/${e.currentTarget.dataset.picture}`
     currentPicture = e.currentTarget.dataset.picture
-    bigImageStart.style.backgroundImage = `url('${pathToPhoto}')`
-    bigImageFill.style.backgroundImage = `url('${pathToPhoto}')`
+    bigImageStart.src = pathToPhoto
+    bigImageFill.src = pathToPhoto
 
     btnNext.disabled = false
   }
@@ -93,10 +95,13 @@ const { fail } = require('assert')
 
       const photoDiv = document.createElement('div')
       photoDiv.addEventListener('click', showOnBigPicture)
-      photoDiv.style.backgroundImage = `url('${pathToPhoto}')`
+      photoDiv.classList.add('lazy')
+      photoDiv.dataset.bg = pathToPhoto
+      // photoDiv.style.backgroundImage = `url('${pathToPhoto}')`
       photoDiv.dataset.picture = photo
 
       thumbnailsContainer.appendChild(photoDiv)
+      lazyLoadInstance.update()
     })
   }
 
