@@ -197,6 +197,8 @@ const { fail } = require('assert')
       pages[3].classList.remove('hidden')
       inputEmail.value = ''
       inputName.value = ''
+      bigImageStart.src = './img/placeholder.svg'
+      bigImageFill.src = './img/placeholder.svg'
       btnSend.disabled = true
       setTimeout(() => {
         pages[3].classList.add('hidden')
@@ -233,10 +235,6 @@ const { fail } = require('assert')
       key.addEventListener('click', () => {
         const input = document.querySelector('input[data-active="true"]')
         input.value += key.dataset.key
-        // input.focus()
-        // document
-        //   .querySelector('input[data-active="true"][type="text"]')
-        //   .setSelectionRange(input.value.length, input.value.length)
         keyboard.dataset.shifted === 'true' ? shiftDown() : null
         if (inputEmail.value !== '') {
           if (inputName.value !== '') {
