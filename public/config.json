@@ -1,5 +1,5 @@
 {
-  "url": "http://10.4.17.21:3000/delete?=",
+  "url": "http://10.4.17.21:3000/?=",
   "pathToPhotos": "//10.4.17.21/Photo",
   "pathToThumbnails": "thumbnails"
 }
