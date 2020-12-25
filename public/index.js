@@ -181,12 +181,15 @@ const { fail } = require('assert')
           pass: 'dTctSIke',
         },
       })
+      const photo = `${pathToPhotos}/${currentPicture.split('.')[0]}_Frame.${
+        currentPicture.split('.')[1]
+      }`
       let mailToSend = {
         ...mail,
         attachments: [
           {
             filename: 'photo.png',
-            content: fs.createReadStream(resolve(pathToPhotos, currentPicture)),
+            content: fs.createReadStream(resolve(pathToPhotos, photo)),
           },
         ],
       }
