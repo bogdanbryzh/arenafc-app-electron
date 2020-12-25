@@ -9,6 +9,7 @@ const createWindow = () => {
     frame: false,
     webPreferences: {
       nodeIntegration: true,
+      spellcheck: false
     },
   })
 
