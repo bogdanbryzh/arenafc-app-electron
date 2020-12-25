@@ -95,10 +95,13 @@ const { fail } = require('assert')
 
       const photoDiv = document.createElement('div')
       photoDiv.addEventListener('click', showOnBigPicture)
-      photoDiv.classList.add('lazy')
-      photoDiv.dataset.bg = pathToPhoto
+      const image = document.createElement('img')
+      image.classList.add('lazy')
+      image.dataset.src = pathToPhoto
+      image.alt = photo
       // photoDiv.style.backgroundImage = `url('${pathToPhoto}')`
       photoDiv.dataset.picture = photo
+      photoDiv.appendChild(image)
 
       thumbnailsContainer.appendChild(photoDiv)
       lazyLoadInstance.update()
@@ -125,13 +128,13 @@ const { fail } = require('assert')
               return v.name
             })
             .filter(file => {
-              console.log(file)
               return (
                 file.split('.')[0].split('_')[
                   file.split('.')[0].split('_').length - 1
                 ] === 'Frame'
               )
             })
+          console.log(files)
           resolve([...files])
         }
       })
