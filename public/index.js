@@ -389,6 +389,10 @@
 
   let menuTimer
 
+  const closeMenu = () => {
+    menuBox.classList.add('hidden')
+  }
+
   const reloadWindow = () => {
     location.reload()
   }
@@ -398,6 +402,7 @@
       bigImageFill.src = './img/placeholder.svg'
       bigImageStart.src = './img/placeholder.svg'
       btnNext.disabled = 'true'
+      closeMenu()
     } catch (err) {
       alert(err)
     }
@@ -406,12 +411,6 @@
   const saveToExcel = () => {
     console.log('selecting dir')
     ipcRenderer.send('select-dirs')
-    // window.postMessage({
-    //   type: 'select-dirs',
-    // })
-  }
-  const closeMenu = () => {
-    menuBox.classList.add('hidden')
   }
 
   const showMenu = () => {
