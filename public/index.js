@@ -365,6 +365,12 @@
     }
   }
 
+  const deleteUsersData = () => {
+    if (fs.existsSync('data.json')) {
+      fs.unlinkSync('data.json')
+    }
+  }
+
   const saveExcelFile = dir => {
     const json = JSON.parse(fs.readFileSync('data.json'))
     const { users } = json
@@ -384,8 +390,9 @@
     reload: document.querySelector('[data-menu-action="reload"]'),
     delete: document.querySelector('[data-menu-action="delete"]'),
     saveUsers: document.querySelector('[data-menu-action="save"]'),
+    deleteUsers: document.querySelector('[data-menu-action="deletejson"]'),
     close: document.querySelector('[data-menu-action="closemenu"]'),
-    quit: document.querySelector('[data-menu-action="closeapp"]')
+    quit: document.querySelector('[data-menu-action="closeapp"]'),
   }
 
   let menuTimer
@@ -424,10 +431,11 @@
       controls.delete.classList.remove('hidden')
     }
   }
-  
+
   controls.reload.addEventListener('click', reloadWindow)
   controls.delete.addEventListener('click', deletePicture)
   controls.saveUsers.addEventListener('click', saveToExcel)
+  controls.deleteUsers.addEventListener('click', deleteUsersData)
   controls.close.addEventListener('click', closeMenu)
   controls.quit.addEventListener('click', quitApp)
 

@@ -1,5 +1,11 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, dialog, globalShortcut, ipcMain } = require('electron')
+const {
+  app,
+  BrowserWindow,
+  dialog,
+  globalShortcut,
+  ipcMain,
+} = require('electron')
 
 let mainWindow
 
