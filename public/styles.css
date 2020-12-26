@@ -32,6 +32,21 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+#menuBox {
+  position: fixed;
+  top: 36px;
+  left: 62px;
+  z-index: 9999;
+  width: 200px;
+  background-color: #1274e4cb;
+  color: #fff;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#menuBox div {
+  padding: 10px 20px;
+}
+
 .header {
   position: absolute;
   left: 0;

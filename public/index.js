@@ -197,7 +197,7 @@ const { fail } = require('assert')
       mailToSend.html = mailToSend.html.replace(/({name})/g, inputName.value)
       let info = await transporter.sendMail(mailToSend)
       try {
-        let response = await fetch(config.url + currentPicture)
+        let response = await fetch(config.url + 'd?file=' + currentPicture)
       } catch (err) {
         console.log(err)
       }
@@ -352,4 +352,52 @@ const { fail } = require('assert')
     })
   }
   enableKeyboard()
+
+  const menuBtn = document.getElementById('menu')
+  const menuBox = document.getElementById('menuBox')
+
+  const controls = {
+    reload: document.querySelector('[data-menu-action="reload"]'),
+    delete: document.querySelector('[data-menu-action="delete"]'),
+    close: document.querySelector('[data-menu-action="closemenu"]'),
+  }
+
+  let menuTimer
+
+  const reloadWindow = () => {
+    location.reload()
+  }
+  const deletePicture = () => {
+    try {
+      fetch(config.url + 'del?file=' + currentPicture)
+    } catch (err) {
+      alert(err)
+    }
+  }
+  const closeMenu = () => {
+    menuBox.classList.add('hidden')
+  }
+
+  const showMenu = () => {
+    menuBox.classList.remove('hidden')
+    if (currentPicture) {
+      controls.delete.classList.remove('hidden')
+    }
+    controls.reload.addEventListener('click', reloadWindow)
+    controls.delete.addEventListener('click', deletePicture)
+    controls.close.addEventListener('click', closeMenu)
+  }
+
+  const handleMouseDown = e => {
+    menuTimer = setTimeout(() => {
+      showMenu()
+    }, 3000)
+  }
+
+  const handleMouseUp = e => {
+    clearTimeout(menuTimer)
+  }
+
+  menuBtn.addEventListener('mousedown', handleMouseDown)
+  menuBtn.addEventListener('mouseup', handleMouseUp)
 })()
