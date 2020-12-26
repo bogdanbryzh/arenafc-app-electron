@@ -385,12 +385,17 @@
     delete: document.querySelector('[data-menu-action="delete"]'),
     saveUsers: document.querySelector('[data-menu-action="save"]'),
     close: document.querySelector('[data-menu-action="closemenu"]'),
+    quit: document.querySelector('[data-menu-action="closeapp"]')
   }
 
   let menuTimer
 
   const closeMenu = () => {
     menuBox.classList.add('hidden')
+  }
+
+  const quitApp = () => {
+    window.close()
   }
 
   const reloadWindow = () => {
@@ -418,11 +423,13 @@
     if (currentPicture) {
       controls.delete.classList.remove('hidden')
     }
-    controls.reload.addEventListener('click', reloadWindow)
-    controls.delete.addEventListener('click', deletePicture)
-    controls.saveUsers.addEventListener('click', saveToExcel)
-    controls.close.addEventListener('click', closeMenu)
   }
+  
+  controls.reload.addEventListener('click', reloadWindow)
+  controls.delete.addEventListener('click', deletePicture)
+  controls.saveUsers.addEventListener('click', saveToExcel)
+  controls.close.addEventListener('click', closeMenu)
+  controls.quit.addEventListener('click', quitApp)
 
   const handleMouseDown = e => {
     menuTimer = setTimeout(() => {
