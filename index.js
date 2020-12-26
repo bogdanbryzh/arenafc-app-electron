@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, globalShortcut } = require('electron')
+const { app, BrowserWindow, dialog, globalShortcut, ipcMain } = require('electron')
 
 let mainWindow
 
@@ -9,7 +9,7 @@ const createWindow = () => {
     frame: false,
     webPreferences: {
       nodeIntegration: true,
-      spellcheck: false
+      spellcheck: false,
     },
   })
 
@@ -34,4 +34,13 @@ app.on('window-all-closed', function () {
 
 app.on('will-quit', () => {
   globalShortcut.unregisterAll()
+})
+
+ipcMain.on('select-dirs', async (event, arg) => {
+  console.log('selecting directory')
+  const result = await dialog.showOpenDialog(mainWindow, {
+    properties: ['openDirectory'],
+  })
+  console.log('directories selected', result.filePaths)
+  mainWindow.webContents.send('selected-dir', result.filePaths)
 })

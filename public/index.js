@@ -1,20 +1,18 @@
-const { fail } = require('assert')
-
 ;(async () => {
+  const { ipcRenderer } = require('electron')
   const fs = require('fs')
+  const path = require('path')
   const nodemailer = require('nodemailer')
   const { resolve } = require('path')
   const lowdb = require('lowdb')
   const FileSync = require('lowdb/adapters/FileSync')
+  const json2xls = require('json2xls')
 
-  if (!fs.existsSync('c:\\documents')) {
-    fs.mkdirSync('c:\\documents')
-  }
-  if (!fs.existsSync('c:\\documents\\data.json')) {
+  if (!fs.existsSync('data.json')) {
     fs.writeFileSync('data.json', JSON.stringify({ users: [] }))
   }
 
-  const adapter = new FileSync('C:\\documents\\data.json')
+  const adapter = new FileSync('data.json')
   const db = lowdb(adapter)
 
   db.defaults({ users: [] }).write()
@@ -354,12 +352,37 @@ const { fail } = require('assert')
   }
   enableKeyboard()
 
+  const writeXlsx = (data, dir, filename = 'users', i = 1) => {
+    let pathToXlsx = path.resolve(dir, filename + '.xlsx')
+    console.log(filename)
+    if (fs.existsSync(pathToXlsx)) {
+      filename = `users (${i++})`
+      console.log(filename)
+      writeXlsx(data, dir, filename, i)
+    } else {
+      fs.writeFileSync(pathToXlsx, data, 'binary')
+    }
+  }
+
+  const saveExcelFile = dir => {
+    const json = JSON.parse(fs.readFileSync('data.json'))
+    const { users } = json
+    const xlsx = json2xls(users)
+    writeXlsx(xlsx, dir)
+  }
+
+  ipcRenderer.on('selected-dir', (event, args) => {
+    console.log('selected')
+    saveExcelFile(args[0])
+  })
+
   const menuBtn = document.getElementById('menu')
   const menuBox = document.getElementById('menuBox')
 
   const controls = {
     reload: document.querySelector('[data-menu-action="reload"]'),
     delete: document.querySelector('[data-menu-action="delete"]'),
+    saveUsers: document.querySelector('[data-menu-action="save"]'),
     close: document.querySelector('[data-menu-action="closemenu"]'),
   }
 
@@ -378,6 +401,14 @@ const { fail } = require('assert')
       alert(err)
     }
   }
+
+  const saveToExcel = () => {
+    console.log('selecting dir')
+    ipcRenderer.send('select-dirs')
+    // window.postMessage({
+    //   type: 'select-dirs',
+    // })
+  }
   const closeMenu = () => {
     menuBox.classList.add('hidden')
   }
@@ -389,6 +420,7 @@ const { fail } = require('assert')
     }
     controls.reload.addEventListener('click', reloadWindow)
     controls.delete.addEventListener('click', deletePicture)
+    controls.saveUsers.addEventListener('click', saveToExcel)
     controls.close.addEventListener('click', closeMenu)
   }
 

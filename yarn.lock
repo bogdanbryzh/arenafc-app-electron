@@ -597,6 +597,13 @@ esprima@^4.0.0:
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
   integrity sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==
 
+excel-export@~0.3.11:
+  version "0.3.11"
+  resolved "https://registry.yarnpkg.com/excel-export/-/excel-export-0.3.11.tgz#6bf6b9d65555ebe3f0daeaa5732f7b69986a7eb4"
+  integrity sha1-a/a51lVV6+Pw2uqlcy97aZhqfrQ=
+  dependencies:
+    node-zip "1.x"
+
 extract-zip@^1.0.3:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/extract-zip/-/extract-zip-1.7.0.tgz#556cc3ae9df7f452c493a0cfb51cc30277940927"
@@ -909,6 +916,13 @@ json-stringify-safe@^5.0.1:
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
   integrity sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=
 
+json2xls@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/json2xls/-/json2xls-0.1.2.tgz#37358ed82a8fcaf92bb3b24d8759ac57e394e017"
+  integrity sha1-NzWO2CqPyvkrs7JNh1msV+OU4Bc=
+  dependencies:
+    excel-export "~0.3.11"
+
 json5@^2.1.2:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/json5/-/json5-2.1.3.tgz#c9b0f7fa9233bfe5807fe66fcf3a5617ed597d43"
@@ -931,6 +945,13 @@ jsonfile@^6.0.1:
     universalify "^2.0.0"
   optionalDependencies:
     graceful-fs "^4.1.6"
+
+jszip@2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/jszip/-/jszip-2.5.0.tgz#7444fd8551ddf3e5da7198fea0c91bc8308cc274"
+  integrity sha1-dET9hVHd8+XacZj+oMkbyDCMwnQ=
+  dependencies:
+    pako "~0.2.5"
 
 keyv@^3.0.0:
   version "3.1.0"
@@ -1052,6 +1073,13 @@ ms@2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
+node-zip@1.x:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/node-zip/-/node-zip-1.1.1.tgz#94d1ad674a3cd46a1588dd736f4a9a78c757eb62"
+  integrity sha1-lNGtZ0o81GoViN1zb0qaeMdX62I=
+  dependencies:
+    jszip "2.5.0"
+
 nodemailer@^6.4.17:
   version "6.4.17"
   resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.4.17.tgz#8de98618028953b80680775770f937243a7d7877"
@@ -1106,6 +1134,11 @@ package-json@^6.3.0:
     registry-auth-token "^4.0.0"
     registry-url "^5.0.0"
     semver "^6.2.0"
+
+pako@~0.2.5:
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/pako/-/pako-0.2.9.tgz#f3f7522f4ef782348da8161bad9ecfd51bf83a75"
+  integrity sha1-8/dSL073gjSNqBYbrZ7P1Rv4OnU=
 
 path-parse@^1.0.6:
   version "1.0.6"
