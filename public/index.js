@@ -353,36 +353,6 @@
   }
   enableKeyboard()
 
-  const writeXlsx = (data, dir, filename = 'users', i = 1) => {
-    let pathToXlsx = path.resolve(dir, filename + '.xlsx')
-    console.log(filename)
-    if (fs.existsSync(pathToXlsx)) {
-      filename = `users (${i++})`
-      console.log(filename)
-      writeXlsx(data, dir, filename, i)
-    } else {
-      fs.writeFileSync(pathToXlsx, data, 'binary')
-    }
-  }
-
-  const deleteUsersData = () => {
-    if (fs.existsSync('data.json')) {
-      fs.unlinkSync('data.json')
-    }
-  }
-
-  const saveExcelFile = dir => {
-    const json = JSON.parse(fs.readFileSync('data.json'))
-    const { users } = json
-    const xlsx = json2xls(users)
-    writeXlsx(xlsx, dir)
-  }
-
-  ipcRenderer.on('selected-dir', (event, args) => {
-    console.log('selected')
-    saveExcelFile(args[0])
-  })
-
   const menuBtn = document.getElementById('menu')
   const menuBox = document.getElementById('menuBox')
 
@@ -431,6 +401,34 @@
       controls.delete.classList.remove('hidden')
     }
   }
+
+  const writeXlsx = (data, dir, filename = 'users', i = 1) => {
+    let pathToXlsx = path.resolve(dir, filename + '.xlsx')
+    if (fs.existsSync(pathToXlsx)) {
+      filename = `users (${i++})`
+      writeXlsx(data, dir, filename, i)
+    } else {
+      fs.writeFileSync(pathToXlsx, data, 'binary')
+    }
+  }
+
+  const deleteUsersData = () => {
+    if (fs.existsSync('data.json')) {
+      fs.unlinkSync('data.json')
+    }
+    closeMenu()
+  }
+
+  const saveExcelFile = dir => {
+    const json = JSON.parse(fs.readFileSync('data.json'))
+    const { users } = json
+    const xlsx = json2xls(users)
+    writeXlsx(xlsx, dir)
+  }
+
+  ipcRenderer.on('selected-dir', (event, args) => {
+    saveExcelFile(args[0])
+  })
 
   controls.reload.addEventListener('click', reloadWindow)
   controls.delete.addEventListener('click', deletePicture)
