@@ -208,6 +208,7 @@ const { fail } = require('assert')
       bigImageStart.src = './img/placeholder.svg'
       bigImageFill.src = './img/placeholder.svg'
       btnSend.disabled = true
+      btnNext.disabled = true
       setTimeout(() => {
         pages[3].classList.add('hidden')
         pages[0].classList.remove('hidden')
