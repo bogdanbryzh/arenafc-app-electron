@@ -372,6 +372,7 @@ const { fail } = require('assert')
       fetch(config.url + 'del?file=' + currentPicture)
       bigImageFill.src = './img/placeholder.svg'
       bigImageStart.src = './img/placeholder.svg'
+      btnNext.disabled = 'true'
     } catch (err) {
       alert(err)
     }
