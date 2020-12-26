@@ -63,7 +63,7 @@
 }
 [data-menu-action]:not([data-menu-action='closemenu']) img {
   width: 20px;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 [data-menu-action='closemenu'] {
