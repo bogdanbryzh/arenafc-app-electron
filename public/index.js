@@ -145,7 +145,7 @@ const { fail } = require('assert')
 
   const activateWatching = folder => {
     fs.watch(folder, () => {
-      renderPhotos()
+      setTimeout(() => renderPhotos(), 300)
     })
   }
 
