@@ -205,6 +205,7 @@
       inputName.value = ''
       bigImageStart.src = './img/placeholder.svg'
       bigImageFill.src = './img/placeholder.svg'
+      currentPicture = null
       btnSend.disabled = true
       btnNext.disabled = true
       setTimeout(() => {
