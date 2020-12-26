@@ -391,7 +391,6 @@
   }
 
   const saveToExcel = () => {
-    console.log('selecting dir')
     ipcRenderer.send('select-dirs')
   }
 
@@ -409,6 +408,7 @@
       writeXlsx(data, dir, filename, i)
     } else {
       fs.writeFileSync(pathToXlsx, data, 'binary')
+      closeMenu()
     }
   }
 
