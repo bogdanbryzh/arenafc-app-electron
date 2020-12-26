@@ -414,7 +414,7 @@
 
   const deleteUsersData = () => {
     if (fs.existsSync('data.json')) {
-      fs.writeFileSync('data.json', '{"users":[]}')
+      db.set('users', []).write()
     }
     closeMenu()
   }
