@@ -37,14 +37,50 @@
   top: 36px;
   left: 62px;
   z-index: 9999;
-  width: 200px;
-  background-color: #1274e4cb;
-  color: #fff;
-  font-family: 'Courier New', Courier, monospace;
+  width: 300px;
+  background-color: #fff;
+  color: #333;
+  font-size: 20px;
+  border: 2px solid #333;
+  border-radius: 5px;
 }
 
-#menuBox div {
-  padding: 10px 20px;
+#menuBox .wrapper {
+  width: 100%;
+  position: relative;
+}
+
+#menuBox .menu-header {
+  padding: 10px;
+  text-align: center;
+  font-weight: 600;
+}
+
+[data-menu-action]:not([data-menu-action='closemenu']) {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+[data-menu-action]:not([data-menu-action='closemenu']) img {
+  width: 20px;
+  margin-right: 10px;
+}
+
+[data-menu-action='closemenu'] {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  display: block;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff2a;
+}
+
+[data-menu-action] img {
+  width: 32px;
 }
 
 .header {
