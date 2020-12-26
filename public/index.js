@@ -370,6 +370,8 @@ const { fail } = require('assert')
   const deletePicture = () => {
     try {
       fetch(config.url + 'del?file=' + currentPicture)
+      bigImageFill.src = './img/placeholder.svg'
+      bigImageStart.src = './img/placeholder.svg'
     } catch (err) {
       alert(err)
     }
