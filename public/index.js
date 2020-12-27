@@ -194,11 +194,6 @@
       mailToSend.to = inputEmail.value
       mailToSend.html = mailToSend.html.replace(/({name})/g, inputName.value)
       let info = await transporter.sendMail(mailToSend)
-      try {
-        let response = await fetch(config.url + 'd?file=' + currentPicture)
-      } catch (err) {
-        console.log(err)
-      }
       pages[2].classList.add('hidden')
       pages[3].classList.remove('hidden')
       inputEmail.value = ''
