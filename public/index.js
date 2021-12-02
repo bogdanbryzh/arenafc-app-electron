@@ -91,9 +91,10 @@
     let photos = await getPhotos(pathToPhotos)
     thumbnailsContainer.innerHTML = ''
     photos.forEach(photo => {
-      pathToPhoto = `${pathToPhotos}/${pathToThumbnails}/${
+      const pathToPhoto = `${pathToPhotos}/${pathToThumbnails}/${
         photo.split('.')[0]
       }_Small.${photo.split('.')[1]}`
+      console.log(pathToPhoto)
 
       const photoDiv = document.createElement('div')
       photoDiv.addEventListener('click', showOnBigPicture)
@@ -113,8 +114,7 @@
         if (err) {
           reject(err)
         } else {
-          files = files
-            .slice(1, -1)
+          const refinedFiles = files
             .map(fileName => {
               return {
                 name: fileName,
@@ -128,14 +128,15 @@
               return v.name
             })
             .filter(file => {
+              if (file === 'thumbnails') return false;
+              // console.log(file)
               return (
                 file.split('.')[0].split('_')[
                   file.split('.')[0].split('_').length - 1
                 ] !== 'Frame'
               )
             })
-          console.log(files)
-          resolve([...files])
+          resolve(refinedFiles)
         }
       })
     })
@@ -444,4 +445,6 @@
 
   menuBtn.addEventListener('mousedown', handleMouseDown)
   menuBtn.addEventListener('mouseup', handleMouseUp)
+  menuBtn.addEventListener('touchstart', handleMouseDown, false)
+  menuBtn.addEventListener('touchedn', handleMouseUp, false)
 })()
